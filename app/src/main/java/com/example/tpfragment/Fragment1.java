@@ -1,64 +1,89 @@
 package com.example.tpfragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment1#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.textfield.TextInputEditText;
+
 public class Fragment1 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private TextInputEditText nomEditText, prenomEditText, dateNaissanceEditText, emailEditText, phoneEditText;
+    private RadioGroup hobbiesRadioGroup;
+    private RadioButton readingRadio, sportRadio, musicRadio;
+    private RadioButton synchronizeRadio;
+    private Button submitButton;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Fragment1() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment1.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment1 newInstance(String param1, String param2) {
-        Fragment1 fragment = new Fragment1();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_1, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_1, container, false);
+        nomEditText = view.findViewById(R.id.nom);
+        prenomEditText = view.findViewById(R.id.prenom);
+        dateNaissanceEditText = view.findViewById(R.id.datenaissance);
+        emailEditText = view.findViewById(R.id.email);
+        phoneEditText = view.findViewById(R.id.phone);
+        hobbiesRadioGroup = view.findViewById(R.id.hobbiesRadioGroup);
+        readingRadio = view.findViewById(R.id.readingRadio);
+        sportRadio = view.findViewById(R.id.sportRadio);
+        musicRadio = view.findViewById(R.id.musicRadio);
+        synchronizeRadio = view.findViewById(R.id.synchronizeRadio);
+        submitButton = view.findViewById(R.id.button);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Récupérer les données saisies
+                String nom = nomEditText.getText().toString();
+                String prenom = prenomEditText.getText().toString();
+                String dateNaissance = dateNaissanceEditText.getText().toString();
+                String email = emailEditText.getText().toString();
+                String phone = phoneEditText.getText().toString();
+                String hobbies = "";
+
+                // Vérifier les centres d'intérêt sélectionnés
+                if (readingRadio.isChecked()) {
+                    hobbies += "Reading, ";
+                }
+                if (sportRadio.isChecked()) {
+                    hobbies += "Sport, ";
+                }
+                if (musicRadio.isChecked()) {
+                    hobbies += "Music, ";
+                }
+
+                // Vérifier la synchronisation des données
+                boolean synchronisation = synchronizeRadio.isChecked();
+
+                // Passer les données au fragment d'affichage
+                Fragment2 fragment2 = new Fragment2();
+                Bundle bundle = new Bundle();
+                bundle.putString("nom", nom);
+                bundle.putString("prenom", prenom);
+                bundle.putString("dateNaissance", dateNaissance);
+                bundle.putString("email", email);
+                bundle.putString("phone", phone);
+                bundle.putString("hobbies", hobbies);
+                bundle.putBoolean("synchronisation", synchronisation);
+                fragment2.setArguments(bundle);
+
+                // Remplacer le fragment actuel par le fragment d'affichage
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment2)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        return view;
     }
 }

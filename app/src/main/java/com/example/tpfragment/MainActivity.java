@@ -1,8 +1,7 @@
 package com.example.tpfragment;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,11 +11,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Instanciez et affichez le Fragment1 dans le conteneur de fragment
-        Fragment1 fragment1 = new Fragment1();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment1);
-        fragmentTransaction.commit();
+        // Charge le premier fragment lors de la création de l'activité
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new Fragment1())
+                    .commit();
+        }
     }
 }
