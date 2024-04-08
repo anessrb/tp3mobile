@@ -48,14 +48,43 @@
         android:id="@+id/validerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#246EE9"
         android:fontFamily="@font/poppins_medium"
-        android:text="Validate"
+        android:text="Validez"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/synchronisationTextView" />
+
+    <Button
+        android:id="@+id/retourButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#246EE9"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Retour"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/validerButton" />
+
+    <Button
+        android:id="@+id/telechargerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#246EE9"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Telecharger"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/retourButton" />
 
     <TextView
         android:id="@+id/telephoneTextView"

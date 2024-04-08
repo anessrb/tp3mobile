@@ -39,6 +39,13 @@ public class Fragment1 extends Fragment {
         synchronizeRadio = view.findViewById(R.id.synchronizeRadio);
         submitButton = view.findViewById(R.id.button);
 
+        Bundle bundle = getArguments();
+        if(bundle != null){
+        nomEditText.setText(bundle.getString("nom"));
+        prenomEditText.setText(bundle.getString("prenom"));
+        dateNaissanceEditText.setText(bundle.getString("dateNaissance"));
+        phoneEditText.setText(bundle.getString("phone"));}
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,4 +93,6 @@ public class Fragment1 extends Fragment {
 
         return view;
     }
+
+
 }
